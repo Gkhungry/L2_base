@@ -1,12 +1,10 @@
-function solution(str){
-    var i = 0;
-    var result = new Array();
+function solution(str) {
     if (str.length % 2 !== 0) {
-      str = str + '_';
+      str += '_';
     }
-    while (i < str.length) {
-        result.push(str[i] + str[i+1]);
-        i += 2;
-      }
+    const result = [];
+    for (let i = 0; i < str.length; i += 2) {
+      result.push(str.slice(i, i + 2));
+    }
     return result;
   }

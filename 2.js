@@ -1,10 +1,12 @@
-var ip2Number = ip => ip.split('.').reduce((t, n) => t * 256 + +n)
-var number2Ip = num => [24, 16, 8, 0].map(d => num >> d & 255).join('.')
-
 function ipv4Parser(ip, mask) {
-  var numIp   = ip2Number(ip)
-  var numMask = ip2Number(mask)
-  var subnet  = number2Ip(numIp &  numMask)
-  var host    = number2Ip(numIp & ~numMask)
-  return [subnet, host]
-}
+    const ipOctets = ip.split('.').map(Number);
+    const maskOctets = mask.split('.').map(Number);
+  
+    const networkBlock = ipOctets.map((octet, i) => octet & maskOctets[i]);
+    const hostIdentifier = ipOctets.map((octet, i) => octet & ~maskOctets[i]);
+  
+    return [
+      networkBlock.join('.'),
+      hostIdentifier.join('.')
+    ];
+  }

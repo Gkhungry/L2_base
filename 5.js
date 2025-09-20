@@ -1,17 +1,17 @@
-const primeFactors = n => {
-    if (n < 2) return `(${n})`;
-    let factors = '';
-    for ( let i = 2; i <= n; i++) {
-      let count = 0;
-      while ( n%i === 0 ) {
-        count++; 
-        n /= i;
-      }
-      if (count) {
-        factors += `(${i}`;
-        if (count > 1) factors += `**${count}`;
-        factors += `)`;
+function primeFactors(n) {
+    const factors = new Map();
+    let divisor = 2;
+  
+    while (n > 1) {
+      if (n % divisor === 0) {
+        factors.set(divisor, (factors.get(divisor) || 0) + 1);
+        n /= divisor;
+      } else {
+        divisor++;
       }
     }
-    return factors;
+  
+    return [...factors.entries()]
+      .map(([prime, count]) => count === 1 ? `(${prime})` : `(${prime}**${count})`)
+      .join('');
   }

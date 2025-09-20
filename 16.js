@@ -1,28 +1,23 @@
 Array.prototype.square = function() {
-    var squared = [];
-    for (var i = 0; i < this.length; i++) {
-      squared[i] = Math.pow(this[i], 2);
-    }
-    return squared;
-  }
+    return this.map(n => n ** 2);
+  };
   
   Array.prototype.cube = function() {
-    var cubed = [];
-    for (var i = 0; i < this.length; i++) {
-      cubed[i] = Math.pow(this[i], 3);
-    }
-    return cubed;
-  }
+    return this.map(n => n ** 3);
+  };
   
   Array.prototype.sum = function() {
-    var sum = 0;
-    for (var i = 0; i < this.length; i++) {
-      sum += this[i];
-    }
-    return sum;
-  }
+    return this.reduce((acc, n) => acc + n, 0);
+  };
   
   Array.prototype.average = function() {
-    if (this.length == 0) return NaN;
-    return this.sum() / this.length;
-  }
+    return this.length === 0 ? NaN : this.sum() / this.length;
+  };
+  
+  Array.prototype.even = function() {
+    return this.filter(n => n % 2 === 0);
+  };
+  
+  Array.prototype.odd = function() {
+    return this.filter(n => n % 2 !== 0);
+  };

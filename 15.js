@@ -1,23 +1,19 @@
-function howManyTimes(time1,time2){
+function howManyTimes(time1, time2) {
     const start = new Date(time1);
     const end = new Date(time2);
     let count = 0;
-    let t = new Date(start);
-    
-    while (t < end) {
-      let h = t.getHours();
-      let m = t.getMinutes();
-      let s = t.getSeconds();
-    
-    if(m === 0 && s < 12) {
-      let hour = h % 12;
-      if( hour === 0) hour = 12;
-      if(s < hour) count++;
+  
+    for (let t = new Date(start); t < end; t.setSeconds(t.getSeconds() + 1)) {
+      const hour = t.getHours();
+      const minute = t.getMinutes();
+      const second = t.getSeconds();
+  
+      if (minute === 0 && second < (hour % 12 || 12)) {
+        count++;
+      } else if (minute === 30 && second === 0) {
+        count++;
+      }
     }
-    if(m === 30 && s === 0){
-      count ++;
-    }
-      t.setSeconds(t.getSeconds() + 1);
-    }
+  
     return count;
   }

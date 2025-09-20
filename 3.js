@@ -1,10 +1,16 @@
 function whatCentury(year) {
-    var century = Math.ceil(year / 100);
-    if (century > 10 && century < 20) return century + "th";
-    switch (century % 10) {
-      case 1: return century + "st";
-      case 2: return century + "nd";
-      case 3: return century + "rd";
-      default: return century + "th";
-    }
+    const numYear = parseInt(year, 10);
+    const century = Math.ceil(numYear / 100);
+  
+    const suffix = (() => {
+      if (century % 100 >= 11 && century % 100 <= 13) return 'th';
+      switch (century % 10) {
+        case 1: return 'st';
+        case 2: return 'nd';
+        case 3: return 'rd';
+        default: return 'th';
+      }
+    })();
+  
+    return century + suffix;
   }

@@ -1,13 +1,11 @@
-function bingo(ticket, win){
-    let miniWins = 0
-    for (let i = 0; i < ticket.length; i++) {
-      for( let j = 0; j < ticket[i][0].length; j++) {
-        if (ticket[i][0][j].charCodeAt() === ticket[i][1]) {
-            miniWins++
-            break
-          }
+function bingo(ticket, win) {
+    let miniWins = 0;
+  
+    for (let [str, num] of ticket) {
+      if (str.split('').some(char => char.charCodeAt(0) === num)) {
+        miniWins++;
       }
     }
-    if (miniWins >= win) return 'Winner!';
-    return 'Loser!'
+  
+    return miniWins >= win ? 'Winner!' : 'Loser!';
   }
